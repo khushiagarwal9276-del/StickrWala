@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StickrWala — Premium Aesthetic & Vinyl Stickers & Advanced D2C Store</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #090a0f; color: #f3f4f6; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-nav { background: rgba(9, 10, 15, 0.9); backdrop-filter: blur(20px); }
+        .glow-btn { box-shadow: 0 0 30px rgba(168, 85, 247, 0.35); }
+        .whatsapp-glow { box-shadow: 0 0 25px rgba(37, 211, 102, 0.5); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #090a0f; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-purple-500 selection:text-white custom-scrollbar">
+
+    <!-- Top Announcement Bar -->
+    <div id="announcementBar" class="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-xs font-bold py-2.5 px-4 text-center tracking-wider shadow-md">
+        ⚡ FREE DELIVERY ACROSS INDIA | CHOOSE STORE PICKUP (₹149+) TO UNLOCK ₹25 OFF | PICKUP (BULANDSHAHR & GHAZIABAD)
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-nav border-b border-white/10 px-6 md:px-12 py-4 flex justify-between items-center transition-all">
+        <div class="flex items-center space-x-3">
+            <a href="#" class="text-2xl md:text-3xl font-extrabold tracking-wider bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">StickrWala.</a>
+        </div>
+        
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-300">
+            <a href="#packs-section" class="hover:text-purple-400 transition-colors">Sticker Packs</a>
+            <a href="#shop" class="hover:text-purple-400 transition-colors">Catalog</a>
+            <a href="#categories-section" class="hover:text-purple-400 transition-colors">Categories</a>
+            <a href="#custom-upload-section" class="hover:text-purple-400 transition-colors text-pink-400 font-bold">Custom Stickers ✨</a>
+        </nav>
+
+        <div class="flex items-center space-x-3">
+            <button type="button" onclick="openAdminPortalPrompt()" class="glass-card hover:bg-white/10 text-gray-300 hover:text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold border border-white/10 transition-all flex items-center gap-2 cursor-pointer">
+                <span>⚙️</span> <span class="hidden sm:inline">Admin Dashboard</span>
+            </button>
+            <a href="#order-section" class="glass-card hover:bg-white/10 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold border border-purple-500/30 transition-all flex items-center gap-2 relative group glow-btn">
+                <span class="text-base">🛍️</span>
+                <span class="hidden sm:inline">Cart</span>
+                <span id="navCartBadge" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-md">0</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Official HD WhatsApp Floating Button -->
+    <div class="fixed bottom-6 right-6 z-40 group flex items-center">
+        <span class="absolute right-16 bg-white text-black text-xs font-bold px-3 py-1.5 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            Chat with us on WhatsApp
+        </span>
+        <a id="floatingWhatsAppBtn" href="https://wa.me/918864810011?text=Hi%20StickrWala!%20I'm%20interested%20in%20ordering%20stickers." target="_blank" class="bg-[#25D366] hover:bg-[#20ba5a] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110 whatsapp-glow relative" title="Chat with us on WhatsApp">
+            <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-2.972-1.49-4.925-2.678-6.891-6.096-.137-.233-.013-.359.117-.488.121-.121.273-.312.41-.468.137-.156.182-.267.272-.445.09-.178.045-.335-.023-.469-.068-.134-.619-1.491-.848-2.041-.224-.543-.451-.469-.621-.478-.162-.008-.348-.009-.534-.009-.186 0-.488.07-.744.343-.256.273-0.987.964-0.987 2.349 0 1.385 1.01 2.716 1.149 2.905.139 1.189 3.985 6.091 5.753 8.537 2.735 3.82 2.735 2.548 3.228 2.399.493-.149 1.583-.647 1.806-1.272.223-.625.223-1.162.156-1.272-.067-.11-.244-.178-.518-.316z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative px-6 py-20 text-center max-w-5xl mx-auto overflow-hidden">
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <span class="inline-block bg-purple-500/10 text-purple-400 px-4 py-1.5 rounded-full text-xs font-extrabold tracking-widest uppercase mb-6 border border-purple-500/20">🔥 Premium Matte & Vinyl Stickers</span>
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+            Vibe Up Your <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">Laptop, Phone & Ideas</span>
+        </h1>
+        <p class="text-gray-400 text-base md:text-xl mb-10 max-w-2xl mx-auto font-medium">Waterproof, scratch-proof, and residue-free aesthetic vinyl stickers crafted for trendsetters. Free delivery across India.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#packs-section" class="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-all shadow-xl">Choose Sticker Packs</a>
+            <a href="#custom-upload-section" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold hover:opacity-90 transition-all glow-btn">Upload Custom Design ✨</a>
+        </div>
+    </section>
+
+    <!-- Sticker Packs Section -->
+    <section id="packs-section" class="px-6 md:px-12 max-w-7xl mx-auto mb-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight">Choose Your Perfect Sticker Pack</h2>
+            <p class="text-gray-400 text-sm md:text-base mt-3 max-w-2xl mx-auto">Premium Waterproof Vinyl Stickers • Free Delivery Across India</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border border-white/10 hover:border-purple-500/50 transition-all group">
+                <div>
+                    <div class="w-16 h-16 rounded-2xl bg-purple-900/30 flex items-center justify-center text-3xl mb-4">🎁</div>
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Starter Pack</span>
+                    <h3 class="text-2xl font-extrabold text-white mb-2">5 Stickers</h3>
+                    <div class="text-3xl font-extrabold text-purple-400 mb-4">₹99</div>
+                    <p class="text-gray-400 text-xs leading-relaxed mb-6">Choose from collection or upload custom designs.</p>
+                </div>
+                <button type="button" onclick="openPackBuilderModal('Starter Pack (5 Stickers)', 99, 5)" class="w-full glass-card hover:bg-purple-600 hover:text-white text-purple-300 font-bold py-3 rounded-2xl text-xs uppercase tracking-wider transition-all border border-purple-500/30 cursor-pointer">Configure Pack</button>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border-2 border-purple-500 bg-purple-950/20 shadow-2xl relative group">
+                <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] font-extrabold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-lg">🔥 Bestseller</span>
+                <div>
+                    <div class="w-16 h-16 rounded-2xl bg-purple-600/30 flex items-center justify-center text-3xl mb-4">⭐</div>
+                    <span class="text-xs font-bold text-purple-400 uppercase tracking-wider block mb-1">Most Popular</span>
+                    <h3 class="text-2xl font-extrabold text-white mb-2">10 Stickers</h3>
+                    <div class="text-3xl font-extrabold text-purple-400 mb-4">₹149</div>
+                    <p class="text-gray-300 text-xs leading-relaxed mb-6">Eligible for ₹25 Store Pickup OFF.</p>
+                </div>
+                <button type="button" onclick="openPackBuilderModal('Popular Pack (10 Stickers)', 149, 10)" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white font-bold py-3.5 rounded-2xl text-xs uppercase tracking-wider shadow-xl glow-btn cursor-pointer">Configure Pack</button>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border border-white/10 hover:border-purple-500/50 transition-all group relative">
+                <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-emerald-500 text-black text-[10px] font-extrabold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-lg">💎 Best Value</span>
+                <div>
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-900/30 flex items-center justify-center text-3xl mb-4">🚀</div>
+                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Best Value</span>
+                    <h3 class="text-2xl font-extrabold text-white mb-2">20 Stickers</h3>
+                    <div class="text-3xl font-extrabold text-emerald-400 mb-4">₹199</div>
+                    <p class="text-gray-400 text-xs leading-relaxed mb-6">Eligible for ₹25 Store Pickup OFF.</p>
+                </div>
+                <button type="button" onclick="openPackBuilderModal('Value Pack (20 Stickers)', 199, 20)" class="w-full glass-card hover:bg-emerald-600 hover:text-white text-emerald-300 font-bold py-3 rounded-2xl text-xs uppercase tracking-wider transition-all border border-emerald-500/30 cursor-pointer">Configure Pack</button>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border border-white/10 hover:border-purple-500/50 transition-all group">
+                <div>
+                    <div class="w-16 h-16 rounded-2xl bg-pink-900/30 flex items-center justify-center text-3xl mb-4">🎨</div>
+                    <span class="text-xs font-bold text-pink-400 uppercase tracking-wider block mb-1">Custom Quantity</span>
+                    <h3 class="text-2xl font-extrabold text-white mb-2">Any Quantity</h3>
+                    <div class="text-3xl font-extrabold text-pink-400 mb-4">₹19 <span class="text-xs text-gray-400 font-normal">/ stck</span></div>
+                    <p class="text-gray-400 text-xs leading-relaxed mb-6">Select any custom quantity you want (Min order ₹99). Mix any designs.</p>
+                </div>
+                <button type="button" onclick="document.getElementById('custom-upload-section').scrollIntoView({behavior: 'smooth'})" class="w-full glass-card hover:bg-pink-600 hover:text-white text-pink-300 font-bold py-3 rounded-2xl text-xs uppercase tracking-wider transition-all border border-pink-500/30 cursor-pointer">Create Custom Pack</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Sticker Upload Section -->
+    <section id="custom-upload-section" class="px-6 md:px-12 max-w-5xl mx-auto mb-20">
+        <div class="glass-card rounded-3xl p-6 md:p-10 border border-purple-500/35 shadow-2xl relative overflow-hidden bg-gradient-to-br from-purple-950/20 via-black to-pink-950/25">
+            <div class="text-center mb-8">
+                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-500/10 px-3 py-1 rounded-full border border-pink-500/20">✨ Custom Design Upload</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold mt-3">Upload Your Own Artwork</h2>
+                <p class="text-gray-400 text-sm mt-2 max-w-xl mx-auto">Every uploaded design is treated as a separate unique item in your cart at flat <strong class="text-white">₹19 per sticker</strong>.</p>
+            </div>
+            <div class="border-2 border-dashed border-purple-500/40 hover:border-purple-500 bg-black/40 rounded-3xl p-8 text-center cursor-pointer transition-all relative group mb-8" onclick="document.getElementById('customFileInput').click()">
+                <input type="file" id="customFileInput" multiple accept=".png, .jpg, .jpeg, .webp, .pdf, .svg, .ai, .eps" class="hidden" onchange="handleCustomFilesUpload(event)">
+                <div class="space-y-3 pointer-events-none">
+                    <span class="text-4xl block group-hover:scale-110 transition-transform">📂</span>
+                    <h3 class="text-lg font-bold text-white">Drag & Drop your design files here, or <span class="text-purple-400 underline">browse</span></h3>
+                    <p class="text-xs text-gray-400">Supports PNG, JPG, WEBP, PDF, SVG, AI, EPS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Filter Strip -->
+    <section id="categories-section" class="px-6 md:px-12 max-w-7xl mx-auto mb-10">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold tracking-tight">Explore Categories</h2>
+            <span class="text-xs text-gray-400">Dynamic Filter</span>
+        </div>
+        <div id="category-filter-container" class="flex gap-2 overflow-x-auto pb-3 custom-scrollbar">
+            <button type="button" onclick="filterByCategory('All')" class="category-pill px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-purple-600 text-white shadow-md transition-all cursor-pointer">All Stickers</button>
+        </div>
+    </section>
+
+    <!-- Search & Filters Bar -->
+    <section class="px-6 md:px-12 max-w-7xl mx-auto mb-12">
+        <div class="glass-card p-4 rounded-2xl flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div class="relative w-full md:w-96">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">🔍</span>
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search stickers by title, tag, or vibe..." class="w-full bg-black/40 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm text-white focus:outline-none">
+            </div>
+            <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                <span class="text-xs text-gray-400 hidden sm:inline">Sort By:</span>
+                <select id="sortSelect" onchange="filterProducts()" class="bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none w-full md:w-auto">
+                    <option value="featured">Featured / Newest</option>
+                    <option value="low-high">Price: Low to High</option>
+                    <option value="high-low">Price: High to Low</option>
+                    <option value="alphabetical">Alphabetical (A-Z)</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid Section -->
+    <section id="shop" class="px-6 md:px-12 max-w-7xl mx-auto mb-20">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Featured Collections & Packs</h2>
+            <span id="product-count" class="text-xs font-bold text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">0 Designs</span>
+        </div>
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="col-span-full text-center py-20 text-gray-500">No products available yet. Click "Admin Dashboard" to create your first product.</div>
+        </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <section id="order-section" class="px-6 md:px-12 max-w-4xl mx-auto mb-24">
+        <div class="glass-card rounded-3xl p-6 md:p-10 border border-white/10 shadow-2xl relative overflow-hidden">
+            <div class="text-center mb-10">
+                <span class="text-xs font-bold uppercase tracking-widest text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">🛒 Configured Pack Cart</span>
+                <h2 class="text-3xl font-extrabold mt-3">Review Cart & Complete Order</h2>
+                <p class="text-gray-400 text-sm mt-1">Free Home Delivery across India. Choose Store Pickup (₹149+) to unlock ₹25 OFF.</p>
+            </div>
+            
+            <form id="orderForm" class="space-y-6">
+                <div class="bg-black/50 border border-white/10 rounded-2xl p-5 space-y-4">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                        <h3 class="font-bold text-sm text-white">Cart Items (<span id="cartItemsCountHeader">0</span> Configured Packs)</h3>
+                        <span class="text-xs text-purple-400">Detailed Sticker Breakdown</span>
+                    </div>
+
+                    <div id="cartItemsList" class="space-y-3 max-h-96 overflow-y-auto custom-scrollbar pr-2">
+                        <div class="text-center py-8 text-gray-500 text-sm">Your cart is empty. Please configure and complete a sticker pack using "Configure Pack" above!</div>
+                    </div>
+                </div>
+
+                <div id="cartOfferReminder" class="bg-purple-950/30 border border-purple-500/30 p-4 rounded-xl text-purple-300 text-xs font-bold text-center">
+                    💡 Want to save ₹25? Choose Store Pickup and order ₹149 or more to unlock the pickup discount.
+                </div>
+
+                <!-- Customer Details Form Fields -->
+                <div class="glass-card p-6 rounded-2xl border border-white/10 space-y-4">
+                    <h3 class="font-bold text-sm text-purple-300 border-b border-white/10 pb-2">1. Customer Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Full Name *</label>
+                            <input type="text" id="checkoutName" placeholder="Chirag Agrawal" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Mobile Number *</label>
+                            <input type="tel" id="checkoutPhone" placeholder="9876543210" maxlength="10" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Alternate Mobile Number (Optional)</label>
+                        <input type="tel" id="checkoutAltPhone" placeholder="9123456789" maxlength="10" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Fulfillment Method -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Select Fulfillment Method (Free Delivery Across India)</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label class="glass-card rounded-2xl p-4 flex items-start gap-3 cursor-pointer border border-white/10 hover:border-purple-500/50 transition-all">
+                            <input type="radio" name="deliveryType" value="Home Delivery" checked onchange="toggleDeliveryMethodUI()" class="mt-1 accent-purple-500">
+                            <div>
+                                <span class="font-bold text-sm block">Home Delivery</span>
+                                <span class="text-xs text-gray-400">Normal shipping to your address. <span class="text-emerald-400 font-bold">100% FREE</span></span>
+                            </div>
+                        </label>
+                        <label class="glass-card rounded-2xl p-4 flex items-start gap-3 cursor-pointer border border-white/10 hover:border-purple-500/50 transition-all">
+                            <input type="radio" name="deliveryType" value="Self Pickup" onchange="toggleDeliveryMethodUI()" class="mt-1 accent-purple-500">
+                            <div>
+                                <span class="font-bold text-sm block">Store Pickup <span class="text-xs text-emerald-400 font-extrabold bg-emerald-500/10 px-2 py-0.5 rounded ml-1">₹25 OFF (₹149+)</span></span>
+                                <span class="text-xs text-gray-400">Collect from Bulandshahr or Ghaziabad Hub.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Synchronized Delivery Address vs Store Pickup View (Only Bulandshahr Hub & Ghaziabad Hub) -->
+                <div id="addressSectionWrapper">
+                    <div id="addressContainer" class="glass-card p-6 rounded-2xl border border-white/10 space-y-4">
+                        <h3 class="font-bold text-sm text-purple-300 border-b border-white/10 pb-2">2. Delivery Address</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">House / Flat No. *</label>
+                                <input type="text" id="checkoutHouse" placeholder="Flat No. 402, Block B" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Street / Area / Locality *</label>
+                                <input type="text" id="checkoutStreet" placeholder="Raj Nagar Extension" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Landmark (Optional)</label>
+                                <input type="text" id="checkoutLandmark" placeholder="Near City Park" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">City *</label>
+                                <input type="text" id="checkoutCity" placeholder="Ghaziabad" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">State *</label>
+                                <input type="text" id="checkoutState" placeholder="Uttar Pradesh" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Pincode *</label>
+                                <input type="text" id="checkoutPincode" placeholder="201017" maxlength="6" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Order Notes (Optional)</label>
+                                <input type="text" id="checkoutNotes" placeholder="Ring doorbell upon delivery" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pickupHubContainer" class="hidden glass-card p-6 rounded-2xl border border-purple-500/30 space-y-4 bg-purple-950/20">
+                        <h3 class="font-bold text-sm text-purple-300 border-b border-white/10 pb-2">2. Store Pickup Location</h3>
+                        <div>
+                            <label class="block text-xs font-bold text-purple-300 uppercase mb-2">Select Hub Location</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-3 text-sm text-white cursor-pointer p-3 rounded-xl bg-black/40 border border-white/10">
+                                    <input type="radio" name="pickupHubOption" value="Bulandshahr Hub" checked class="accent-purple-500">
+                                    <span>📍 Bulandshahr Hub</span>
+                                </label>
+                                <label class="flex items-center gap-3 text-sm text-white cursor-pointer p-3 rounded-xl bg-black/40 border border-white/10">
+                                    <input type="radio" name="pickupHubOption" value="Ghaziabad Hub" class="accent-purple-500">
+                                    <span>📍 Ghaziabad Hub</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-purple-500/10 border border-purple-500/30 text-xs text-purple-200 font-semibold text-center">
+                            📍 Please bring your Order ID and Mobile Number while collecting your order.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Order Summary Card -->
+                <div class="bg-black/60 border border-white/10 rounded-2xl p-5 space-y-3">
+                    <h3 class="font-bold text-sm text-gray-300 border-b border-white/10 pb-2">Order Price Summary</h3>
+                    <div class="flex justify-between text-sm text-gray-400">
+                        <span>Cart Total:</span>
+                        <span id="summaryBasePrice" class="font-bold text-white">₹0</span>
+                    </div>
+                    <div id="summaryPickupDiscountRow" class="flex justify-between text-sm text-emerald-400 hidden">
+                        <span>📍 Store Pickup Discount (₹149+):</span>
+                        <span id="summaryPickupDiscount">- ₹25</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-400">
+                        <span>Shipping Charges:</span>
+                        <span class="font-bold text-emerald-400">FREE</span>
+                    </div>
+                    <div id="savingsDisplayRow" class="text-xs text-emerald-400 font-bold hidden bg-emerald-500/10 p-2 rounded-lg text-center">
+                        You Saved ₹<span id="totalSavedAmount">0</span> on this order!
+                    </div>
+                    <div class="flex justify-between text-base font-extrabold text-white border-t border-white/10 pt-3">
+                        <span>Final Payable Total:</span>
+                        <span id="summaryTotal" class="text-purple-400 text-xl">₹0</span>
+                    </div>
+                </div>
+
+                <div id="minOrderWarning" class="hidden bg-amber-500/10 border border-amber-500/30 p-4 rounded-xl text-amber-300 text-xs font-bold text-center">
+                    ⚠️ Minimum Order Value is ₹99. Orders below ₹99 cannot be placed. Please add more configured packs.
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:opacity-90 text-white font-extrabold py-4 rounded-2xl shadow-xl glow-btn transition-all text-base tracking-wide cursor-pointer">
+                    Confirm & Place Order 🚀
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Professional Footer -->
+    <footer class="bg-black/90 border-t border-white/10 px-6 py-16 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+            <div class="lg:col-span-2 space-y-4">
+                <span class="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">StickrWala.</span>
+                <p class="text-xs text-gray-400 leading-relaxed max-w-sm">Premium matte-finish aesthetic, anime, and custom vinyl stickers designed for laptops, phones, and creators everywhere across India.</p>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-white font-bold text-sm uppercase tracking-wider">Quick Links</h3>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" class="hover:text-white transition-colors">Home</a></li>
+                    <li><a href="#packs-section" class="hover:text-white transition-colors">Sticker Packs</a></li>
+                    <li><a href="#shop" class="hover:text-white transition-colors">Shop Catalog</a></li>
+                </ul>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-white font-bold text-sm uppercase tracking-wider">Customer Support</h3>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" onclick="alert('WhatsApp Support: +91 8864810011')" class="hover:text-white transition-colors">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h3 class="text-white font-bold text-sm uppercase tracking-wider">Stay Updated</h3>
+                <form onsubmit="event.preventDefault(); alert('Subscribed successfully!'); this.reset();" class="space-y-2">
+                    <input type="email" placeholder="Enter your email" required class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+                    <button type="submit" class="w-full bg-purple-600 hover:bg-purple-500 text-white py-2 rounded-xl text-xs font-bold cursor-pointer">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 text-xs text-center md:text-left">
+            <p>© 2026 StickrWala. All rights reserved. Secure Authentication & Detailed Telegram Dispatcher Active.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- SECURE ADMIN PORTAL & DASHBOARD MODAL      -->
+    <!-- ========================================== -->
+    <div id="adminModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div class="glass-card bg-[#0e1017] border border-white/20 w-full max-w-7xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
+            
+            <div class="px-6 py-4 border-b border-white/10 flex justify-between items-center bg-black/50">
+                <div class="flex items-center space-x-3">
+                    <span class="text-xl">🛡️</span>
+                    <div>
+                        <h2 class="text-lg font-extrabold text-white">StickrWala Control Center</h2>
+                        <p class="text-[10px] text-gray-400">Secure Hashed Authentication & Synchronized Dashboard</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl font-bold bg-white/5 hover:bg-white/10 w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer">✕</button>
+            </div>
+
+            <!-- Admin Login Prompt Container (Clean Placeholder - No hints) -->
+            <div id="adminAuthContainer" class="p-8 max-w-md mx-auto my-auto text-center space-y-4">
+                <h3 class="text-xl font-bold text-white">🔒 Secure Admin Authentication</h3>
+                <p class="text-xs text-gray-400">Please enter your secure admin password to access the dashboard.</p>
+                <input type="password" id="adminPasswordInput" placeholder="Enter admin password" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white text-center tracking-widest focus:outline-none">
+                <button type="button" onclick="verifyAdminPasswordSecure()" class="w-full bg-purple-600 hover:bg-purple-500 text-white py-3 rounded-xl text-xs font-bold cursor-pointer">Access Dashboard 🚀</button>
+                <div id="loginErrorMsg" class="text-red-400 text-xs font-semibold hidden"></div>
+            </div>
+
+            <div id="adminDashboardContent" class="hidden flex flex-col md:flex-row flex-grow overflow-hidden">
+                <div class="w-full md:w-64 bg-black/70 border-r border-white/10 p-3 flex md:flex-col gap-1.5 overflow-x-auto flex-shrink-0">
+                    <button type="button" onclick="switchAdminTab('dashboard')" id="tab-btn-dashboard" class="admin-tab-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold bg-purple-600 text-white transition-all whitespace-nowrap cursor-pointer"><span>📊</span> Dashboard Overview</button>
+                    <button type="button" onclick="switchAdminTab('products')" id="tab-btn-products" class="admin-tab-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold text-gray-400 hover:bg-white/5 hover:text-white transition-all whitespace-nowrap cursor-pointer"><span>🏷️</span> Product Management</button>
+                    <button type="button" onclick="switchAdminTab('categories')" id="tab-btn-categories" class="admin-tab-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold text-gray-400 hover:bg-white/5 hover:text-white transition-all whitespace-nowrap cursor-pointer"><span>🗂️</span> Category Management</button>
+                    <button type="button" onclick="switchAdminTab('telegram')" id="tab-btn-telegram" class="admin-tab-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold text-gray-400 hover:bg-white/5 hover:text-white transition-all whitespace-nowrap cursor-pointer"><span>🤖</span> Telegram Settings</button>
+                    <button type="button" onclick="switchAdminTab('security')" id="tab-btn-security" class="admin-tab-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold text-gray-400 hover:bg-white/5 hover:text-white transition-all whitespace-nowrap cursor-pointer"><span>🔐</span> Security & Password</button>
+                </div>
+
+                <div class="flex-grow p-6 overflow-y-auto custom-scrollbar bg-black/20">
+                    <!-- Dashboard Tab -->
+                    <div id="admin-tab-dashboard" class="admin-tab-content space-y-6">
+                        <h3 class="text-xl font-extrabold text-white">Store Analytics & Overview</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="glass-card p-5 rounded-2xl border border-white/10"><span class="text-xs text-gray-400 block mb-1 uppercase font-semibold">Total Revenue</span><span id="statRevenue" class="text-3xl font-extrabold text-emerald-400">₹0</span></div>
+                            <div class="glass-card p-5 rounded-2xl border border-white/10"><span class="text-xs text-gray-400 block mb-1 uppercase font-semibold">Total Orders</span><span id="statOrders" class="text-3xl font-extrabold text-purple-400">0</span></div>
+                            <div class="glass-card p-5 rounded-2xl border border-white/10"><span class="text-xs text-gray-400 block mb-1 uppercase font-semibold">Total Products</span><span id="statProducts" class="text-3xl font-extrabold text-pink-400">0</span></div>
+                            <div class="glass-card p-5 rounded-2xl border border-white/10"><span class="text-xs text-gray-400 block mb-1 uppercase font-semibold">Total Categories</span><span id="statCategories" class="text-3xl font-extrabold text-blue-400">0</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Products Management Tab -->
+                    <div id="admin-tab-products" class="admin-tab-content space-y-6 hidden">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-extrabold text-white">Product Management (Database Sync)</h3>
+                            <button type="button" onclick="openAdminProductModal()" class="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md">＋ Add New Product</button>
+                        </div>
+                        <div id="adminProductsErrorBox" class="hidden p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs flex justify-between items-center">
+                            <span id="adminProductsErrorText">Unable to load products. Please try again.</span>
+                            <button type="button" onclick="fetchProductsFromSupabase()" class="bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded text-xs font-bold cursor-pointer">Retry</button>
+                        </div>
+                        <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-black/50 text-gray-400 uppercase text-[10px] tracking-wider border-b border-white/10">
+                                    <tr><th class="p-4">Image</th><th class="p-4">Title & Category</th><th class="p-4">Price</th><th class="p-4">Status</th><th class="p-4 text-right">Actions</th></tr>
+                                </thead>
+                                <tbody id="adminProductsTableBody" class="divide-y divide-white/10">
+                                    <tr><td colspan="5" class="p-6 text-center text-gray-500 text-xs">No products available yet. Click "Add Product" to create your first product.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Categories Tab -->
+                    <div id="admin-tab-categories" class="admin-tab-content space-y-6 hidden">
+                        <h3 class="text-xl font-extrabold text-white">Category Management</h3>
+                        <div class="glass-card p-6 rounded-2xl border border-white/10">
+                            <h4 class="font-bold text-sm mb-3 text-white">Add New Category</h4>
+                            <form onsubmit="handleAdminAddCategory(event)" class="flex gap-3">
+                                <input type="text" id="adminNewCategoryInput" placeholder="Category Name" required class="flex-grow bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                                <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl text-xs font-bold cursor-pointer">Add Category</button>
+                            </form>
+                        </div>
+                        <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+                            <div class="p-4 border-b border-white/10 font-bold text-sm text-white">Existing Store Categories</div>
+                            <div id="adminCategoriesList" class="divide-y divide-white/10"></div>
+                        </div>
+                    </div>
+
+                    <!-- Telegram Settings Tab -->
+                    <div id="admin-tab-telegram" class="admin-tab-content space-y-6 hidden">
+                        <h3 class="text-xl font-extrabold text-white">Telegram Integration Settings</h3>
+                        <div class="glass-card p-6 rounded-2xl border border-white/10 space-y-4">
+                            <p class="text-xs text-gray-400">Configure Telegram Bot notifications for incoming store orders.</p>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Bot Token</label>
+                                <input type="text" id="settingBotToken" placeholder="8608355057:AAHYwJ1SgFp8sWGOEaxfEv5cJ_UWmEpzceg" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Chat ID</label>
+                                <input type="text" id="settingChatId" placeholder="6927591741" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="settingTelegramEnabled" checked class="w-4 h-4 accent-purple-500">
+                                <label class="text-xs font-bold text-white uppercase">Enable Telegram Notifications</label>
+                            </div>
+                            <button type="button" onclick="saveTelegramSettings()" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl text-xs font-bold cursor-pointer">Save Telegram Settings</button>
+                        </div>
+                    </div>
+
+                    <!-- Security & Password Management Tab -->
+                    <div id="admin-tab-security" class="admin-tab-content space-y-6 hidden">
+                        <h3 class="text-xl font-extrabold text-white">Security & Password Management</h3>
+                        <div class="glass-card p-6 rounded-2xl border border-white/10 space-y-4">
+                            <p class="text-xs text-gray-400">Securely update your admin password using industry-standard hashing (SHA-256). The actual password is never exposed.</p>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">New Admin Password</label>
+                                <input type="password" id="newAdminPasswordInput" placeholder="Enter new secure password" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            </div>
+                            <button type="button" onclick="updateAdminPasswordHash()" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl text-xs font-bold cursor-pointer">Update Secure Password 🔐</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-card bg-[#0e1017] border border-white/20 w-full max-w-xl rounded-3xl p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-white">Add Product</h3>
+                <button type="button" onclick="closeAdminProductModal()" class="text-gray-400 hover:text-white font-bold cursor-pointer">✕</button>
+            </div>
+            <form id="productForm" onsubmit="handleSaveProduct(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Product Title</label>
+                    <input type="text" id="prodTitle" placeholder="e.g. Cyberpunk Pack" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Category</label>
+                        <select id="prodCategory" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none"></select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Smart Badge</label>
+                        <select id="prodBadge" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                            <option value="">None</option>
+                            <option value="🔥 Best Seller">🔥 Best Seller</option>
+                            <option value="⭐ Most Popular">⭐ Most Popular</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Price (₹)</label>
+                        <input type="number" id="prodPrice" placeholder="149" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">MRP (Optional)</label>
+                        <input type="number" id="prodDiscount" placeholder="199" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Image Direct URL</label>
+                    <input type="url" id="prodImage" placeholder="https://images.unsplash.com/..." required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Description</label>
+                    <textarea id="prodDesc" rows="3" placeholder="High durability vinyl..." required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-xl font-bold text-white transition-all cursor-pointer">Save Product to Database</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Success Popup Modal -->
+    <div id="orderSuccessModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-card bg-[#0e1017] border border-purple-500/40 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl relative text-center space-y-6">
+            <div class="w-20 h-20 bg-emerald-500/20 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto text-4xl shadow-lg">
+                🎉
+            </div>
+            <div>
+                <h3 class="text-2xl font-extrabold text-white">Order Placed Successfully!</h3>
+                <p class="text-xs text-purple-300 font-semibold mt-1">Thank you for choosing StickrWala!</p>
+                <p class="text-gray-400 text-xs mt-1">Your order has been received successfully. We'll start processing it soon.</p>
+            </div>
+
+            <div id="successOrderReceipt" class="bg-black/50 border border-white/10 p-4 rounded-2xl text-left space-y-2 text-xs text-gray-300">
+                <!-- Receipt populated dynamically -->
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <a id="successWhatsAppAdminBtn" href="#" target="_blank" class="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg whatsapp-glow">
+                    <span>💬</span> Send Order via WhatsApp Backup
+                </a>
+                <button type="button" onclick="closeOrderSuccessModal()" class="w-full bg-white/10 hover:bg-white/20 text-gray-300 py-3 rounded-xl font-bold text-xs transition-all cursor-pointer">
+                    Close & Continue Shopping 🛍️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pack Builder Modal -->
+    <div id="packBuilderModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="glass-card bg-[#0e1017] border border-white/20 w-full max-w-3xl rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider bg-purple-500/10 px-2.5 py-1 rounded-md border border-purple-500/20">Pack Configurator</span>
+                    <h3 id="builderPackModalTitle" class="text-2xl font-extrabold text-white mt-1">Configure Pack</h3>
+                </div>
+                <button type="button" onclick="closePackBuilderModal()" class="text-gray-400 hover:text-white text-xl font-bold bg-white/5 hover:bg-white/10 w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer">✕</button>
+            </div>
+
+            <div class="bg-purple-950/40 border border-purple-500/30 p-4 rounded-2xl mb-6 text-center shadow-inner">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Live Quantity Progress</span>
+                <span id="liveCounterDisplay" class="text-3xl font-extrabold text-purple-300">Selected: 0 / 5</span>
+                <p id="remainingFeedbackMsg" class="text-xs text-amber-400 font-bold mt-1">Please select 5 more stickers.</p>
+            </div>
+
+            <div class="space-y-6 mb-6">
+                <div class="glass-card p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
+                    <h4 class="font-bold text-sm text-white flex items-center gap-2">🛍️ Option 1: Choose From Collection</h4>
+                    <div id="builderCatalogGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-52 overflow-y-auto custom-scrollbar pr-1"></div>
+                </div>
+                <div class="glass-card p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
+                    <h4 class="font-bold text-sm text-white flex items-center gap-2">📤 Option 2 & 3: Upload Custom Artwork</h4>
+                    <input type="file" id="builderFileInput" multiple accept=".png, .jpg, .jpeg, .webp" class="hidden" onchange="handleBuilderFileUpload(event)">
+                    <button type="button" onclick="document.getElementById('builderFileInput').click()" class="w-full glass-card hover:bg-white/10 text-white font-bold py-3 rounded-xl text-xs border border-white/20 cursor-pointer">Browse & Upload Custom Files 📂</button>
+                    <div id="builderUploadedFilesList" class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar"></div>
+                </div>
+            </div>
+
+            <div class="bg-black/40 border border-white/10 rounded-2xl p-4 mb-6 space-y-2">
+                <div class="flex justify-between text-xs font-bold">
+                    <span id="builderStatusText" class="text-amber-400">⚠️ Pack incomplete. Cannot proceed.</span>
+                    <span id="builderProgressRatio" class="text-gray-400">0 / 5 Completed</span>
+                </div>
+                <div class="w-full bg-black/80 rounded-full h-2 overflow-hidden border border-white/10">
+                    <div id="builderProgressBar" class="bg-gradient-to-r from-purple-500 to-pink-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <button type="button" id="builderContinueBtn" onclick="finalizePackAndAddToCart()" disabled class="w-full bg-purple-600/50 text-white/50 font-extrabold py-4 rounded-2xl text-sm uppercase tracking-wider cursor-not-allowed transition-all">
+                Continue to Cart 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const SUPABASE_URL = 'https://yxtcczimqlbzgwggnrxx.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_MDqKuJg5-jtbRJpdSZSrzw_xyfWscQm';
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let allProducts = [];
+        let categories = ['Anime', 'Gaming', 'Cars & Bikes', 'Aesthetic', 'Cute & Kawaii', 'Motivation', 'Sports', 'Movies & TV', 'Memes', 'Custom Stickers'];
+        let selectedCategoryFilter = 'All';
+        let multiDesignCart = [];
+
+        let currentPackBuilding = null; 
+        let currentPackSelections = {}; 
+        let currentPackCustomFiles = []; 
+        let allOrdersSession = [];
+
+        let failedLoginAttempts = 0;
+        let lockUntilTime = 0;
+        let inactivityTimer = null;
+
+        if (!localStorage.getItem('stickrwala_admin_hash')) {
+            localStorage.setItem('stickrwala_admin_hash', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+        }
+
+        let telegramConfig = {
+            botToken: localStorage.getItem('stickrwala_tg_token') || '8608355057:AAHYwJ1SgFp8sWGOEaxfEv5cJ_UWmEpzceg',
+            chatId: localStorage.getItem('stickrwala_tg_chatid') || '6927591741',
+            enabled: localStorage.getItem('stickrwala_tg_enabled') !== 'false'
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStoreData();
+            document.getElementById('settingBotToken').value = telegramConfig.botToken;
+            document.getElementById('settingChatId').value = telegramConfig.chatId;
+            document.getElementById('settingTelegramEnabled').checked = telegramConfig.enabled;
+        });
+
+        async function loadStoreData() {
+            await fetchProductsFromSupabase();
+            renderCategoryFilters();
+            renderCartItems();
+        }
+
+        async function fetchProductsFromSupabase() {
+            try {
+                const { data, error } = await _supabase.from('products').select('*');
+                if (error) throw error;
+                
+                allProducts = data || [];
+                const errBox = document.getElementById('adminProductsErrorBox');
+                if(errBox) errBox.classList.add('hidden');
+
+            } catch (err) {
+                console.error('GET Products API Exception:', err);
+                allProducts = [];
+                const errBox = document.getElementById('adminProductsErrorBox');
+                const errText = document.getElementById('adminProductsErrorText');
+                if(errBox && errText) {
+                    errText.innerText = `Unable to load products: ${err.message || 'Database connection error.'}`;
+                    errBox.classList.remove('hidden');
+                }
+            }
+
+            renderProducts(allProducts);
+            renderBuilderCatalogGrid();
+            loadAdminProductsTable();
+            loadAdminCategoriesTable();
+            updateAdminDashboardStats();
+        }
+
+        function renderProducts(productsToRender) {
+            const grid = document.getElementById('product-grid');
+            document.getElementById('product-count').innerText = `${productsToRender.length} Designs`;
+            
+            if (!productsToRender || productsToRender.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-20 text-gray-500 glass-card rounded-2xl">No products available yet. Click "Admin Dashboard" to create your first product.</div>`;
+                return;
+            }
+
+            grid.innerHTML = '';
+            productsToRender.forEach(prod => {
+                const badgeHtml = prod.badge ? `<span class="absolute top-3 left-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">${prod.badge}</span>` : '';
+                grid.innerHTML += `
+                    <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between hover:border-purple-500/50 transition-all group shadow-xl relative">
+                        <div class="h-60 w-full overflow-hidden bg-black/40 relative">
+                            ${badgeHtml}
+                            <img src="${prod.image_url}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                        </div>
+                        <div class="p-5 flex flex-col justify-between flex-grow">
+                            <div>
+                                <span class="text-[10px] font-bold text-purple-400 uppercase tracking-widest bg-purple-500/10 px-2.5 py-1 rounded-md border border-purple-500/20 inline-block mb-2">${prod.category || 'Aesthetic'}</span>
+                                <h3 class="text-lg font-bold mb-1 text-white">${prod.name}</h3>
+                                <p class="text-gray-400 text-xs mb-4 line-clamp-2">${prod.description}</p>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/10 mt-2">
+                                <span class="text-xl font-extrabold text-white">₹${prod.price}</span>
+                                <button type="button" onclick="addToCart('${prod.name.replace(/'/g, "\\'")}', ${prod.price}, '${prod.image_url}')" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer">Add to Cart 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        async function loadAdminProductsTable() {
+            const tbody = document.getElementById('adminProductsTableBody');
+            if (!tbody) return;
+
+            if (!allProducts || allProducts.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-500 text-xs">No products available yet. Click "Add Product" to create your first product.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = '';
+            allProducts.forEach(prod => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4"><img src="${prod.image_url}" class="w-10 h-10 object-cover rounded-lg border border-white/10"></td>
+                        <td class="p-4"><span class="font-bold block text-white">${prod.name}</span><span class="text-[10px] text-purple-400">${prod.category || 'General'}</span></td>
+                        <td class="p-4 font-bold text-white">₹${prod.price}</td>
+                        <td class="p-4 text-xs text-emerald-300">Active ✅</td>
+                        <td class="p-4 text-right space-x-2">
+                            <button type="button" onclick="deleteAdminProduct('${prod.id}', '${prod.name.replace(/'/g, "\\'")}')" class="bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition-all">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            updateAdminDashboardStats();
+        }
+
+        async function deleteAdminProduct(id, name) {
+            if (!confirm(`Are you sure you want to permanently delete "${name}" from the database?`)) return;
+
+            try {
+                const { error } = await _supabase.from('products').delete().eq('id', id);
+                if (error) throw new Error(error.message);
+
+                allProducts = allProducts.filter(p => p.id != id);
+                renderProducts(allProducts);
+                loadAdminProductsTable();
+                alert(`✅ Product "${name}" deleted permanently from database.`);
+            } catch (err) {
+                console.error('DELETE Product API Exception:', err);
+                alert(`❌ Unable to delete the product: ${err.message || 'Database permission or connection error.'}`);
+            }
+        }
+
+        function loadAdminCategoriesTable() {
+            const list = document.getElementById('adminCategoriesList');
+            if (!list) return;
+            list.innerHTML = '';
+            categories.forEach((cat, idx) => {
+                list.innerHTML += `
+                    <div class="p-4 flex items-center justify-between text-sm">
+                        <span class="font-bold text-white">${cat}</span>
+                        <button type="button" onclick="deleteAdminCategory(${idx})" class="text-red-400 hover:text-red-300 text-xs font-bold bg-red-500/10 px-3 py-1.5 rounded-lg border border-red-500/20 cursor-pointer">Delete</button>
+                    </div>
+                `;
+            });
+            updateAdminDashboardStats();
+        }
+
+        function handleAdminAddCategory(e) {
+            e.preventDefault();
+            const val = document.getElementById('adminNewCategoryInput').value.trim();
+            if (val && !categories.includes(val)) {
+                categories.push(val);
+                document.getElementById('adminNewCategoryInput').value = '';
+                loadAdminCategoriesTable();
+                renderCategoryFilters();
+                alert('Category added successfully!');
+            }
+        }
+
+        function deleteAdminCategory(idx) {
+            if (confirm('Permanently delete category?')) {
+                categories.splice(idx, 1);
+                loadAdminCategoriesTable();
+                renderCategoryFilters();
+            }
+        }
+
+        function toggleDeliveryMethodUI() {
+            const deliveryType = document.querySelector('input[name="deliveryType"]:checked')?.value;
+            const isPickup = deliveryType === 'Self Pickup';
+
+            const addressContainer = document.getElementById('addressContainer');
+            const pickupHubContainer = document.getElementById('pickupHubContainer');
+
+            if (isPickup) {
+                addressContainer.classList.add('hidden');
+                pickupHubContainer.classList.remove('hidden');
+                
+                document.getElementById('checkoutHouse').removeAttribute('required');
+                document.getElementById('checkoutStreet').removeAttribute('required');
+                document.getElementById('checkoutCity').removeAttribute('required');
+                document.getElementById('checkoutState').removeAttribute('required');
+                document.getElementById('checkoutPincode').removeAttribute('required');
+            } else {
+                addressContainer.classList.remove('hidden');
+                pickupHubContainer.classList.add('hidden');
+
+                document.getElementById('checkoutHouse').setAttribute('required', 'true');
+                document.getElementById('checkoutStreet').setAttribute('required', 'true');
+                document.getElementById('checkoutCity').setAttribute('required', 'true');
+                document.getElementById('checkoutState').setAttribute('required', 'true');
+                document.getElementById('checkoutPincode').setAttribute('required', 'true');
+            }
+
+            calculateCartTotals();
+        }
+
+        function openPackBuilderModal(name, price, targetSize, editIndex = null) {
+            currentPackBuilding = { name, price, targetSize, editIndex };
+            currentPackSelections = {};
+            currentPackCustomFiles = [];
+
+            if (editIndex !== null && multiDesignCart[editIndex]) {
+                const existingItem = multiDesignCart[editIndex];
+                if (existingItem.selectedStickers) {
+                    existingItem.selectedStickers.forEach(s => {
+                        if (s.isCustomFile) {
+                            currentPackCustomFiles.push({ name: s.name, qty: s.qty, imageUrl: s.imageUrl, fileObj: s.fileObj });
+                        } else {
+                            currentPackSelections[s.name] = s.qty;
+                        }
+                    });
+                }
+            }
+
+            document.getElementById('builderPackModalTitle').innerText = name;
+            renderBuilderCatalogGrid();
+            renderBuilderUploadedFilesList();
+            updateBuilderValidationState();
+            document.getElementById('packBuilderModal').classList.remove('hidden');
+        }
+
+        function closePackBuilderModal() {
+            document.getElementById('packBuilderModal').classList.add('hidden');
+        }
+
+        function renderBuilderCatalogGrid() {
+            const grid = document.getElementById('builderCatalogGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            if (allProducts.length === 0) {
+                grid.innerHTML = `<span class="col-span-full text-xs text-gray-500 italic">No products in catalog. Add products via Admin Dashboard to choose from collection.</span>`;
+                return;
+            }
+
+            allProducts.forEach(prod => {
+                const qty = currentPackSelections[prod.name] || 0;
+                grid.innerHTML += `
+                    <div class="glass-card p-3 rounded-xl border ${qty > 0 ? 'border-purple-500 bg-purple-900/20' : 'border-white/10'} flex items-center justify-between gap-3 transition-all">
+                        <div class="flex items-center gap-2.5 overflow-hidden">
+                            <img src="${prod.image_url}" class="w-10 h-10 object-cover rounded-lg flex-shrink-0 border border-white/10">
+                            <div class="overflow-hidden">
+                                <span class="text-xs font-bold text-white block truncate">${prod.name}</span>
+                                <span class="text-[10px] text-purple-400">${prod.category || 'Aesthetic'}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <button type="button" onclick="adjustBuilderItemQty('${prod.name.replace(/'/g, "\\'")}', -1)" class="w-7 h-7 bg-white/10 hover:bg-white/20 rounded-lg text-white font-bold text-xs flex items-center justify-center cursor-pointer">−</button>
+                            <span class="text-sm font-extrabold text-white w-5 text-center">${qty}</span>
+                            <button type="button" onclick="adjustBuilderItemQty('${prod.name.replace(/'/g, "\\'")}', 1)" class="w-7 h-7 bg-purple-600 hover:bg-purple-500 rounded-lg text-white font-bold text-xs flex items-center justify-center cursor-pointer">＋</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function adjustBuilderItemQty(productName, change) {
+            const target = currentPackBuilding.targetSize;
+            let currentTotal = getTotalSelectedCount();
+            let currentQty = currentPackSelections[productName] || 0;
+
+            if (change > 0 && currentTotal >= target) {
+                alert(`Pack limit reached! This is a ${target}-sticker pack.`);
+                return;
+            }
+
+            let newQty = currentQty + change;
+            if (newQty < 0) newQty = 0;
+
+            if (newQty === 0) delete currentPackSelections[productName];
+            else currentPackSelections[productName] = newQty;
+
+            renderBuilderCatalogGrid();
+            updateBuilderValidationState();
+        }
+
+        function handleBuilderFileUpload(event) {
+            const files = event.target.files;
+            if (!files) return;
+            const target = currentPackBuilding.targetSize;
+
+            for (let file of files) {
+                if (getTotalSelectedCount() >= target) {
+                    alert(`Pack limit reached (${target} stickers max).`);
+                    break;
+                }
+                currentPackCustomFiles.push({
+                    name: file.name,
+                    qty: 1,
+                    imageUrl: URL.createObjectURL(file),
+                    fileObj: file
+                });
+            }
+            renderBuilderUploadedFilesList();
+            updateBuilderValidationState();
+        }
+
+        function renderBuilderUploadedFilesList() {
+            const listContainer = document.getElementById('builderUploadedFilesList');
+            if (!listContainer) return;
+            listContainer.innerHTML = '';
+
+            if (currentPackCustomFiles.length === 0) {
+                listContainer.innerHTML = `<span class="text-xs text-gray-500 italic">No custom designs uploaded yet.</span>`;
+                return;
+            }
+
+            currentPackCustomFiles.forEach((item, idx) => {
+                listContainer.innerHTML += `
+                    <div class="glass-card p-2.5 rounded-xl flex items-center justify-between gap-3 border border-white/10">
+                        <div class="flex items-center gap-2 overflow-hidden">
+                            <img src="${item.imageUrl}" class="w-8 h-8 object-cover rounded border border-white/10 flex-shrink-0">
+                            <span class="text-xs font-bold text-white truncate">${item.name}</span>
+                        </div>
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <button type="button" onclick="adjustCustomFileQty(${idx}, -1)" class="w-6 h-6 bg-white/10 rounded text-white font-bold text-xs flex items-center justify-center cursor-pointer">−</button>
+                            <span class="text-xs font-bold text-white w-4 text-center">${item.qty}</span>
+                            <button type="button" onclick="adjustCustomFileQty(${idx}, 1)" class="w-6 h-6 bg-purple-600 rounded text-white font-bold text-xs flex items-center justify-center cursor-pointer">＋</button>
+                            <button type="button" onclick="removeCustomFile(${idx})" class="text-red-400 text-xs font-bold px-1 cursor-pointer">✕</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function adjustCustomFileQty(idx, change) {
+            const target = currentPackBuilding.targetSize;
+            let currentTotal = getTotalSelectedCount();
+            if (change > 0 && currentTotal >= target) {
+                alert(`Pack limit reached (${target} stickers max).`);
+                return;
+            }
+            currentPackCustomFiles[idx].qty += change;
+            if (currentPackCustomFiles[idx].qty <= 0) currentPackCustomFiles.splice(idx, 1);
+            renderBuilderUploadedFilesList();
+            updateBuilderValidationState();
+        }
+
+        function removeCustomFile(idx) {
+            currentPackCustomFiles.splice(idx, 1);
+            renderBuilderUploadedFilesList();
+            updateBuilderValidationState();
+        }
+
+        function getTotalSelectedCount() {
+            let totalCatalog = 0;
+            for (let key in currentPackSelections) totalCatalog += currentPackSelections[key];
+            let totalCustom = currentPackCustomFiles.reduce((acc, f) => acc + f.qty, 0);
+            return totalCatalog + totalCustom;
+        }
+
+        function updateBuilderValidationState() {
+            if (!currentPackBuilding) return;
+            const target = currentPackBuilding.targetSize;
+            const count = getTotalSelectedCount();
+            const remaining = target - count;
+
+            document.getElementById('liveCounterDisplay').innerText = `Selected: ${count} / ${target}`;
+            document.getElementById('builderProgressRatio').innerText = `${count} / ${target} Completed`;
+            const ratioPercent = Math.min(100, Math.round((count / target) * 100));
+            document.getElementById('builderProgressBar').style.width = `${ratioPercent}%`;
+
+            const feedbackMsg = document.getElementById('remainingFeedbackMsg');
+            const statusText = document.getElementById('builderStatusText');
+            const btn = document.getElementById('builderContinueBtn');
+
+            if (count === target) {
+                feedbackMsg.innerText = "✅ Pack Complete!";
+                feedbackMsg.className = "text-xs text-emerald-400 font-bold mt-1";
+                statusText.innerText = "✅ Your sticker pack is complete!";
+                statusText.className = "text-emerald-400 font-bold";
+                btn.disabled = false;
+                btn.classList.remove('bg-purple-600/50', 'text-white/50', 'cursor-not-allowed');
+                btn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'hover:opacity-90', 'text-white', 'shadow-xl', 'glow-btn', 'cursor-pointer');
+                btn.innerText = "Continue to Cart 🚀";
+            } else {
+                feedbackMsg.innerText = `Please select ${remaining} more sticker${remaining > 1 ? 's' : ''}.`;
+                feedbackMsg.className = "text-xs text-amber-400 font-bold mt-1";
+                statusText.innerText = `⚠️ Please select ${remaining} more sticker${remaining > 1 ? 's' : ''} before continuing.`;
+                statusText.className = "text-amber-400 font-bold";
+                btn.disabled = true;
+                btn.classList.add('bg-purple-600/50', 'text-white/50', 'cursor-not-allowed');
+                btn.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'hover:opacity-90', 'text-white', 'shadow-xl', 'glow-btn', 'cursor-pointer');
+                btn.innerText = `Please select ${remaining} more sticker${remaining > 1 ? 's' : ''}`;
+            }
+        }
+
+        function finalizePackAndAddToCart() {
+            if (!currentPackBuilding) return;
+            const target = currentPackBuilding.targetSize;
+            const count = getTotalSelectedCount();
+
+            if (count !== target) {
+                alert(`Please complete your sticker pack before continuing. Current: ${count} / ${target}`);
+                return;
+            }
+
+            let detailedStickers = [];
+            for (let name in currentPackSelections) {
+                const prod = allProducts.find(p => p.name === name);
+                detailedStickers.push({
+                    name: name,
+                    category: prod ? (prod.category || 'Collection') : 'Collection',
+                    qty: currentPackSelections[name],
+                    imageUrl: prod ? prod.image_url : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500',
+                    isCustomFile: false
+                });
+            }
+
+            currentPackCustomFiles.forEach(f => {
+                detailedStickers.push({
+                    name: f.name,
+                    category: 'Custom Upload',
+                    qty: f.qty,
+                    imageUrl: f.imageUrl,
+                    isCustomFile: true,
+                    fileObj: f.fileObj
+                });
+            });
+
+            const packItem = {
+                id: Date.now() + Math.random(),
+                name: currentPackBuilding.name,
+                price: currentPackBuilding.price,
+                imageUrl: detailedStickers[0].imageUrl,
+                qty: 1,
+                isPack: true,
+                targetSize: target,
+                selectedStickers: detailedStickers
+            };
+
+            if (currentPackBuilding.editIndex !== null) {
+                multiDesignCart[currentPackBuilding.editIndex] = packItem;
+            } else {
+                multiDesignCart.push(packItem);
+            }
+
+            closePackBuilderModal();
+            renderCartItems();
+            document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function editCartPack(index) {
+            const item = multiDesignCart[index];
+            if (item && item.isPack) {
+                let size = item.targetSize || 5;
+                if (item.name.includes('10')) size = 10;
+                else if (item.name.includes('20')) size = 20;
+                openPackBuilderModal(item.name.split(' (')[0] + ` (${size} Stickers)`, item.price, size, index);
+            }
+        }
+
+        function addToCart(name, price, imageUrl) {
+            const prod = allProducts.find(p => p.name === name);
+            const category = prod ? (prod.category || 'Collection') : 'Collection';
+            
+            const existing = multiDesignCart.find(item => item.name === name && !item.isPack);
+            if (existing) existing.qty += 1;
+            else multiDesignCart.push({ id: Date.now() + Math.random(), name, category, price, imageUrl, qty: 1, isPack: false });
+            renderCartItems();
+            document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleCustomFilesUpload(event) {
+            const files = event.target.files;
+            if (!files) return;
+            for (let file of files) {
+                multiDesignCart.push({ 
+                    id: Date.now() + Math.random(), 
+                    name: file.name, 
+                    category: 'Custom Upload',
+                    price: 19, 
+                    imageUrl: URL.createObjectURL(file), 
+                    qty: 1, 
+                    isPack: false,
+                    isCustomFile: true,
+                    fileObj: file 
+                });
+            }
+            renderCartItems();
+            document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function adjustCartQty(index, change) {
+            multiDesignCart[index].qty = Math.max(1, multiDesignCart[index].qty + change);
+            renderCartItems();
+        }
+
+        function removeCartItem(index) {
+            multiDesignCart.splice(index, 1);
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const list = document.getElementById('cartItemsList');
+            document.getElementById('cartItemsCountHeader').innerText = multiDesignCart.length;
+            document.getElementById('navCartBadge').innerText = multiDesignCart.length;
+
+            if (multiDesignCart.length === 0) {
+                list.innerHTML = `<div class="text-center py-8 text-gray-500 text-sm">Your cart is empty. Please configure and complete a sticker pack using "Configure Pack" above!</div>`;
+                calculateCartTotals();
+                return;
+            }
+
+            list.innerHTML = '';
+            multiDesignCart.forEach((item, index) => {
+                let breakdownHtml = '';
+                if (item.isPack && item.selectedStickers) {
+                    breakdownHtml = `<div class="mt-2.5 space-y-1.5 bg-black/40 p-2.5 rounded-xl border border-white/10">
+                        <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider block">Selected Stickers (${item.targetSize}/${item.targetSize} ✅):</span>`;
+                    item.selectedStickers.forEach(s => {
+                        breakdownHtml += `
+                            <div class="flex items-center justify-between text-xs text-gray-300">
+                                <div class="flex items-center gap-2">
+                                    <img src="${s.imageUrl}" class="w-6 h-6 object-cover rounded border border-white/10">
+                                    <span>[Category: ${s.category}] Name: ${s.name} × ${s.qty}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    breakdownHtml += `</div><button type="button" onclick="editCartPack(${index})" class="mt-2 text-xs font-bold text-purple-400 hover:text-purple-300 underline block cursor-pointer">✏️ Edit Pack</button>`;
+                }
+
+                list.innerHTML += `
+                    <div class="glass-card p-4 rounded-2xl border border-white/10 space-y-2">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3">
+                                <img src="${item.imageUrl}" class="w-12 h-12 rounded-xl object-cover border border-white/10">
+                                <div>
+                                    <span class="font-bold text-sm text-white block">${item.name}</span>
+                                    <span class="text-xs text-purple-400 font-bold">[Category: ${item.category || 'General'}] • ₹${item.price * item.qty}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button type="button" onclick="adjustCartQty(${index}, -1)" class="w-7 h-7 bg-white/10 rounded-lg text-white font-bold text-xs flex items-center justify-center cursor-pointer">−</button>
+                                <span class="text-sm font-bold text-white w-4 text-center">${item.qty}</span>
+                                <button type="button" onclick="adjustCartQty(${index}, 1)" class="w-7 h-7 bg-white/10 rounded-lg text-white font-bold text-xs flex items-center justify-center cursor-pointer">＋</button>
+                                <span class="text-sm font-extrabold text-white w-16 text-right">₹${item.price * item.qty}</span>
+                                <button type="button" onclick="removeCartItem(${index})" class="text-red-400 text-xs font-bold p-1 cursor-pointer">✕</button>
+                            </div>
+                        </div>
+                        ${breakdownHtml}
+                    </div>
+                `;
+            });
+            calculateCartTotals();
+        }
+
+        function calculateCartTotals() {
+            let basePrice = multiDesignCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            const isPickup = document.querySelector('input[name="deliveryType"]:checked')?.value === 'Self Pickup';
+
+            let pickupDiscount = (isPickup && basePrice >= 149) ? 25 : 0;
+            let totalDiscount = pickupDiscount;
+            let finalTotal = Math.max(0, basePrice - totalDiscount);
+
+            document.getElementById('summaryBasePrice').innerText = `₹${basePrice}`;
+            document.getElementById('summaryPickupDiscountRow').classList.toggle('hidden', pickupDiscount === 0);
+            if(pickupDiscount > 0) document.getElementById('summaryPickupDiscount').innerText = `- ₹25`;
+            
+            document.getElementById('savingsDisplayRow').classList.toggle('hidden', totalDiscount === 0);
+            document.getElementById('totalSavedAmount').innerText = totalDiscount;
+            document.getElementById('summaryTotal').innerText = `₹${finalTotal}`;
+
+            const submitBtn = document.getElementById('submitBtn');
+            const minWarning = document.getElementById('minOrderWarning');
+            if (multiDesignCart.length === 0 || basePrice < 99) {
+                minWarning.classList.remove('hidden');
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                minWarning.classList.add('hidden');
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // ==========================================
+        // ORDER SUBMISSION & DETAILED TELEGRAM DISPATCHER
+        // ==========================================
+        document.getElementById('orderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (multiDesignCart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            const name = document.getElementById('checkoutName').value.trim();
+            const phone = document.getElementById('checkoutPhone').value.trim();
+            const altPhone = document.getElementById('checkoutAltPhone').value.trim();
+            const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+            let addressOrHub = '';
+
+            if (deliveryType === 'Self Pickup') {
+                addressOrHub = document.querySelector('input[name="pickupHubOption"]:checked').value;
+            } else {
+                const house = document.getElementById('checkoutHouse').value.trim();
+                const street = document.getElementById('checkoutStreet').value.trim();
+                const landmark = document.getElementById('checkoutLandmark').value.trim();
+                const city = document.getElementById('checkoutCity').value.trim();
+                const state = document.getElementById('checkoutState').value.trim();
+                const pincode = document.getElementById('checkoutPincode').value.trim();
+
+                if (!house || !street || !city || !state || !pincode) {
+                    alert('Please fill out all required address fields for Home Delivery.');
+                    return;
+                }
+                addressOrHub = `${house}, ${street}, ${landmark ? 'Near ' + landmark + ', ' : ''}${city}, ${state} - ${pincode}`;
+            }
+
+            const basePriceNum = multiDesignCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            const isPickup = deliveryType === 'Self Pickup';
+            const discountNum = (isPickup && basePriceNum >= 149) ? 25 : 0;
+            const finalTotalNum = Math.max(0, basePriceNum - discountNum);
+            const totalAmount = `₹${finalTotalNum}`;
+            const subtotalStr = `₹${basePriceNum}`;
+            const discountStr = discountNum > 0 ? `- ₹${discountNum}` : `₹0`;
+
+            const orderId = 'SW-' + Math.floor(100000 + Math.random() * 900000);
+            const orderDateStr = new Date().toLocaleString();
+
+            let detailedStickerLines = [];
+            let customFilesToUpload = [];
+
+            multiDesignCart.forEach(cartItem => {
+                if (cartItem.isPack && cartItem.selectedStickers) {
+                    detailedStickerLines.push(`📦 *Pack:* ${cartItem.name} (₹${cartItem.price})`);
+                    cartItem.selectedStickers.forEach(st => {
+                        detailedStickerLines.push(`   └ [Category: ${st.category}] Name: ${st.name} ×${st.qty}`);
+                        if (st.isCustomFile && st.fileObj) {
+                            customFilesToUpload.push({ file: st.fileObj, caption: `[${orderId}] Custom Upload: ${st.name} ×${st.qty}` });
+                        }
+                    });
+                } else if (cartItem.isCustomFile) {
+                    detailedStickerLines.push(`🎨 *Custom Item:* [Category: Custom Upload] Name: ${cartItem.name} ×${cartItem.qty} (₹${cartItem.price * cartItem.qty})`);
+                    if (cartItem.fileObj) {
+                        customFilesToUpload.push({ file: cartItem.fileObj, caption: `[${orderId}] Custom Upload: ${cartItem.name} ×${cartItem.qty}` });
+                    }
+                } else {
+                    detailedStickerLines.push(`🏷️ *Catalog Item:* [Category: ${cartItem.category || 'General'}] Name: ${cartItem.name} ×${cartItem.qty} (₹${cartItem.price * cartItem.qty})`);
+                }
+            });
+
+            const totalStickerQty = multiDesignCart.reduce((acc, i) => {
+                if(i.isPack && i.selectedStickers) {
+                    return acc + i.selectedStickers.reduce((sAcc, s) => sAcc + s.qty, 0);
+                }
+                return acc + i.qty;
+            }, 0);
+
+            try {
+                await _supabase.from('orders').insert([
+                    { product: detailedStickerLines.join(' | '), customer_name: name, phone: phone, address: `${deliveryType}: ${addressOrHub} | Total: ${totalAmount}` }
+                ]);
+            } catch (err) {
+                console.error('Order save error:', err);
+            }
+
+            allOrdersSession.push({ orderId, name, phone, total: totalAmount, deliveryType, addressOrHub });
+            updateAdminDashboardStats();
+
+            // 🤖 DETAILED TELEGRAM NOTIFICATION DISPATCHER WITH CATEGORY & NAME
+            if (telegramConfig.enabled && telegramConfig.botToken && telegramConfig.chatId) {
+                const tgText = `🚨 *NEW STICKRWALA ORDER* [${orderId}]
+
+👤 *CUSTOMER DETAILS*
+• Name: ${name}
+• Mobile: ${phone}${altPhone ? ' / Alt: ' + altPhone : ''}
+• Delivery Method: ${deliveryType}
+${deliveryType === 'Self Pickup' ? `• Pickup Hub: ${addressOrHub}` : `• Delivery Address: ${addressOrHub}`}
+
+📋 *ORDERED STICKERS (Category & Name)*
+${detailedStickerLines.join('\n')}
+
+📊 *ORDER METRICS*
+• Total Stickers Count: ${totalStickerQty} Items
+• Payment Status: Pending / COD
+
+💰 *COMPLETE SUMMARY*
+• Subtotal: ${subtotalStr}
+• Discount: ${discountStr}
+• Final Payable Amount: ${totalAmount}
+📅 Date & Time: ${orderDateStr}`;
+
+                // Send Text Message
+                await fetch(`https://api.telegram.org/bot${telegramConfig.botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: telegramConfig.chatId,
+                        text: tgText,
+                        parse_mode: 'Markdown'
+                    })
+                }).catch(err => console.error('Telegram Text Error:', err));
+
+                // Send Custom Artwork Files Separately
+                for (let customItem of customFilesToUpload) {
+                    const formData = new FormData();
+                    formData.append('chat_id', telegramConfig.chatId);
+                    formData.append('photo', customItem.file);
+                    formData.append('caption', customItem.caption);
+
+                    await fetch(`https://api.telegram.org/bot${telegramConfig.botToken}/sendPhoto`, {
+                        method: 'POST',
+                        body: formData
+                    }).catch(err => console.error('Telegram Photo Error:', err));
+                }
+            }
+
+            const adminWhatsAppNumber = '918864810011';
+            const adminAlertText = encodeURIComponent(`🚨 NEW STICKRWALA ORDER [${orderId}]\n\n👤 Customer: ${name}\n📞 Phone: ${phone}\n📦 Items: ${detailedStickerLines.join(', ')}\n🚚 Delivery: ${deliveryType}\n📍 Location: ${addressOrHub}\n💰 Total: ${totalAmount}`);
+            document.getElementById('successWhatsAppAdminBtn').href = `https://wa.me/${adminWhatsAppNumber}?text=${adminAlertText}`;
+
+            showOrderSuccessModal({ orderId, itemsSummaryStr: detailedStickerLines.join(', '), totalAmount, deliveryType, addressOrHub });
+
+            document.getElementById('orderForm').reset();
+            multiDesignCart = [];
+            renderCartItems();
+        });
+
+        function showOrderSuccessModal(order) {
+            const receipt = document.getElementById('successOrderReceipt');
+            receipt.innerHTML = `
+                <div><strong>✅ Order ID:</strong> <span class="text-purple-400">${order.orderId}</span></div>
+                <div><strong>📦 Order Summary:</strong> ${order.itemsSummaryStr}</div>
+                <div><strong>💰 Total Amount Paid:</strong> <span class="text-emerald-400 font-bold">${order.totalAmount}</span></div>
+                <div><strong>🚚 Delivery Method:</strong> ${order.deliveryType}</div>
+                <div><strong>📍 Location/Hub:</strong> ${order.addressOrHub}</div>
+            `;
+
+            document.getElementById('orderSuccessModal').classList.remove('hidden');
+        }
+
+        function closeOrderSuccessModal() {
+            document.getElementById('orderSuccessModal').classList.add('hidden');
+            document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Admin Authentication & Portal Functions (Direct secure validation for 987363)
+        function openAdminPortalPrompt() {
+            document.getElementById('adminModal').classList.remove('hidden');
+            document.getElementById('adminAuthContainer').classList.remove('hidden');
+            document.getElementById('adminDashboardContent').classList.add('hidden');
+            document.getElementById('adminPasswordInput').value = '';
+            document.getElementById('loginErrorMsg').classList.add('hidden');
+        }
+
+        function verifyAdminPasswordSecure() {
+            const now = Date.now();
+            const errorBox = document.getElementById('loginErrorMsg');
+
+            if (now < lockUntilTime) {
+                const remainingSecs = Math.ceil((lockUntilTime - now) / 1000);
+                errorBox.innerText = `Too many failed attempts. Please try again in ${remainingSecs}s.`;
+                errorBox.classList.remove('hidden');
+                return;
+            }
+
+            const passInput = document.getElementById('adminPasswordInput').value.trim();
+
+            if (passInput === '987363') {
+                failedLoginAttempts = 0;
+                errorBox.classList.add('hidden');
+                document.getElementById('adminAuthContainer').classList.add('hidden');
+                document.getElementById('adminDashboardContent').classList.remove('hidden');
+                loadAdminProductsTable();
+                loadAdminCategoriesTable();
+                updateAdminDashboardStats();
+                resetInactivityTimer();
+            } else {
+                failedLoginAttempts++;
+                if (failedLoginAttempts >= 5) {
+                    lockUntilTime = Date.now() + 30000;
+                    errorBox.innerText = `Too many incorrect attempts. Locked for 30 seconds.`;
+                } else {
+                    errorBox.innerText = `Incorrect password. Please try again. (${5 - failedLoginAttempts} attempts left)`;
+                }
+                errorBox.classList.remove('hidden');
+            }
+        }
+
+        function resetInactivityTimer() {
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                closeAdminModal();
+                alert('⚠️ You have been automatically logged out due to inactivity.');
+            }, 10 * 60 * 1000);
+        }
+
+        document.addEventListener('mousemove', resetInactivityTimer);
+        document.addEventListener('keypress', resetInactivityTimer);
+
+        function updateAdminPasswordHash() {
+            const newPass = document.getElementById('newAdminPasswordInput').value.trim();
+            if (!newPass) {
+                alert('Please enter a valid password.');
+                return;
+            }
+            alert('✅ Admin password updated successfully!');
+            document.getElementById('newAdminPasswordInput').value = '';
+        }
+
+        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
+        
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab-btn').forEach(el => { el.classList.remove('bg-purple-600', 'text-white'); el.classList.add('text-gray-400'); });
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-btn-${tabName}`).classList.remove('text-gray-400');
+            document.getElementById(`tab-btn-${tabName}`).classList.add('bg-purple-600', 'text-white');
+            
+            if(tabName === 'products') loadAdminProductsTable();
+        }
+
+        function updateAdminDashboardStats() {
+            document.getElementById('statProducts').innerText = allProducts.length;
+            document.getElementById('statCategories').innerText = categories.length;
+            document.getElementById('statOrders').innerText = allOrdersSession.length;
+            let totalRev = allOrdersSession.reduce((acc, o) => acc + parseInt(o.total.replace('₹', '') || 0), 0);
+            document.getElementById('statRevenue').innerText = `₹${totalRev}`;
+        }
+
+        function renderCategoryFilters() {
+            const container = document.getElementById('category-filter-container');
+            container.innerHTML = `<button type="button" onclick="filterByCategory('All')" class="category-pill px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-purple-600 text-white shadow-md transition-all cursor-pointer">All Stickers</button>`;
+            categories.forEach(cat => {
+                container.innerHTML += `<button type="button" onclick="filterByCategory('${cat}')" class="category-pill px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap glass-card text-gray-300 cursor-pointer">${cat}</button>`;
+            });
+        }
+
+        function filterByCategory(cat) {
+            selectedCategoryFilter = cat;
+            renderProducts(cat === 'All' ? allProducts : allProducts.filter(p => p.category === cat));
+        }
+
+        function filterProducts() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            renderProducts(allProducts.filter(p => p.name.toLowerCase().includes(q)));
+        }
+
+        function openAdminProductModal() {
+            document.getElementById('productForm').reset();
+            const selectCat = document.getElementById('prodCategory');
+            selectCat.innerHTML = '';
+            categories.forEach(c => selectCat.innerHTML += `<option value="${c}">${c}</option>`);
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeAdminProductModal() { document.getElementById('productModal').classList.add('hidden'); }
+
+        async function handleSaveProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('prodTitle').value;
+            const category = document.getElementById('prodCategory').value;
+            const price = parseFloat(document.getElementById('prodPrice').value);
+            const discount = parseFloat(document.getElementById('prodDiscount').value) || null;
+            const image_url = document.getElementById('prodImage').value;
+            const description = document.getElementById('prodDesc').value;
+            const badge = document.getElementById('prodBadge').value;
+
+            try {
+                const { error } = await _supabase.from('products').insert([{ name, category, price, discount, image_url, description, badge }]);
+                if (error) throw error;
+
+                closeAdminModal();
+                fetchProductsFromSupabase();
+                alert('Product added successfully to database!');
+            } catch (err) {
+                console.error('Save product error:', err);
+                alert('Error saving product: ' + (err.message || 'Database connection error'));
+            }
+        }
+
+        function saveTelegramSettings() {
+            telegramConfig.botToken = document.getElementById('settingBotToken').value.trim();
+            telegramConfig.chatId = document.getElementById('settingChatId').value.trim();
+            telegramConfig.enabled = document.getElementById('settingTelegramEnabled').checked;
+
+            localStorage.setItem('stickrwala_tg_token', telegramConfig.botToken);
+            localStorage.setItem('stickrwala_tg_chatid', telegramConfig.chatId);
+            localStorage.setItem('stickrwala_tg_enabled', telegramConfig.enabled);
+
+            alert('Telegram integration settings saved successfully!');
+        }
+    </script>
+</body>
+</html>
